@@ -1,4 +1,4 @@
-% Created 2012-07-19 Thu 08:56
+% Created 2012-08-14 Tue 13:31
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -17,9 +17,9 @@
 \tolerance=1000
 \providecommand{\alert}[1]{\textbf{#1}}
 
-\title{\href{file:///home/lxmonk/Documents/school/BA2/nlp122/hw1/ambiguity1x2.png}{nil}}
+\title{Tutorial: An Efficient Algorithm for Easy-First Non-Directional Dependency Parsing -- writing the code}
 \author{Aviad Reich}
-\date{\today}
+\date{2012-07-21 Sat}
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
@@ -32,5 +32,111 @@
 \setcounter{tocdepth}{3}
 \tableofcontents
 \vspace*{1cm}
+
+
+\section{How to contribute to this document}
+\label{sec-1}
+
+  
+This document exists in XHTML, latex, text and org-mode
+versions. Editing the first three is straightforward, but will force
+all future contributors (if such will exist) to use the same
+version/format, since this will break the compatibility of the
+different formats. Do this only if you're sure the future contributors
+will be OK with it, or you know they will not exist (for example: you
+are now completing the document). If you have done so, be sure to
+either label the other versions as outdated/irrelevant, or simply
+delete them.
+
+Another option is to edit the text file `tutorial.org' in you favorite
+text editor. If you ignore lines 5-15, it's pretty much
+straightforward to understand the usage: 
+The number of left-aligned `*' before a line determine it's `depth' in
+the document (more is deeper), and elements are automatically nested in
+the immediate higher level item. 
+
+if you want $\TeX{}$, or $\LaTeX$,
+include its code inside adjacent dollar signs: \\
+\texttt{\$[latex code here]\$}.
+Just look at `tutorial.org' for examples.
+
+To use the other many wonderful, yet simple to use, features of
+org-mode, like auto-numbering of items, footnotes and others, 
+it's recommended you read the \href{http://orgmode.org/}{orgmode website} and the (relevant) \href{http://orgmode.org/org-mode-documentation.html}{docs},
+or the tutorial that comes with it as part of Emacs, or \href{http://orgmode.org/worg/org-tutorials/}{these tutorials}.
+
+\begin{description}
+\item[Exporting] To export to HTML, tex and text once you're done, open
+               Emacs (you  know where to get it), press Ctrl-x Ctrl-f
+               and type the path to the file. Then, press Ctrl-c
+               Ctrl-e h (for HTML), Ctrl-c Ctrl-e p (for pdf), Ctrl-c
+               Ctrl-e l (for latex), Ctrl-c Ctrl-e u (for unicode
+               text, a for ascii). Many other export format exist -
+               you'll find it in the ``Emacs-style popup''
+               window. \\
+               \textbf{MAKE SURE YOU EXPORT IN ALL FORMATS ONCE                YOU'RE DONE, SO COMPATIBILITY IS KEPT.}
+\end{description}
+
+As this is written (August 2012), I care about this document, and
+would be happy to extend my help if it's wanted. To email me use the
+first 3 letters of `Aviad', followed by a dot (`.') and the
+first 3 of `Reich'. Then mail me at: \texttt{[what-you-got]@gmail.com}.
+
+Additionally, there is a github repo:
+\href{https://github.com/lxmonk/NLP12-Easyfirst_tutorial}{https://github.com/lxmonk/NLP12-Easyfirst\_tutorial}, that you can clone
+or fork. If you do, and you've created a new one - change this
+address. Otherwise, let me know and I'll update.
+\section{An intro to dep parsing}
+\label{sec-2}
+\subsection{Formats of the data}
+\label{sec-2-1}
+\subsection{Example sentences}
+\label{sec-2-2}
+\subsection{Rendering of trees in text and graphically}
+\label{sec-2-3}
+\section{Intro to dep parsing using transition based parsing}
+\label{sec-3}
+\subsection{How shift reduce works}
+\label{sec-3-1}
+\subsection{Turning a tree into a sequence of shift reduce transitions}
+\label{sec-3-2}
+\section{Malt like parsing}
+\label{sec-4}
+\subsection{Training a classifier to learn which transition is best at each step}
+\label{sec-4-1}
+\subsection{Typical features used for malt}
+\label{sec-4-2}
+\section{Evaluation methods for dep parsing}
+\label{sec-5}
+\section{Evaluation of our malt parser}
+\label{sec-6}
+\section{Easy First}
+\label{sec-7}
+\subsection{Read the paper}
+\label{sec-7-1}
+
+
+The article: \\
+\textbf{Easy First Dependency Parsing of Modern Hebrew}, \\
+   Yoav Goldberg and Michael Elhadad, \\
+   \emph{SPMRL 2010 (NAACL Workshop on Statistical Parsing of    Morphologically-rich Languages)}
+
+
+It can be obtained from \href{http://www.cs.bgu.ac.il/~yoavg/publications/naacl2010dep.pdf}{Yoav Goldberg's BGU webpage}, or at the acm
+website: 
+\href{http://dl.acm.org/citation.cfm?id=1857999.1858114}{http://dl.acm.org/citation.cfm?id=1857999.1858114}.
+
+
+   
+\subsection{Quiz on the paper}
+\label{sec-7-2}
+\subsubsection{Perceptron Classifier}
+\label{sec-7-2-1}
+\subsubsection{Cython}
+\label{sec-7-2-2}
+
+    
+\section{Cython primer}
+\label{sec-8}
 
 \end{document}

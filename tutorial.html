@@ -3,9 +3,9 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Tutorial: An Efficient Algorithm for Easy-First Non-Directional Dependency Parsing</title>
+<title>Tutorial: An Efficient Algorithm for Easy-First Non-Directional Dependency Parsing &ndash; writing the code</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
-<meta name="title" content="Tutorial: An Efficient Algorithm for Easy-First Non-Directional Dependency Parsing"/>
+<meta name="title" content="Tutorial: An Efficient Algorithm for Easy-First Non-Directional Dependency Parsing &ndash; writing the code"/>
 <meta name="generator" content="Org-mode"/>
 <meta name="generated" content="2012-07-21 Sat"/>
 <meta name="author" content="Aviad Reich"/>
@@ -83,7 +83,47 @@
  }
 /*]]>*///-->
 </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
 
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
 </head>
 <body>
 
@@ -92,7 +132,7 @@
 </div>
 
 <div id="content">
-<h1 class="title">Tutorial: An Efficient Algorithm for Easy-First Non-Directional Dependency Parsing</h1>
+<h1 class="title">Tutorial: An Efficient Algorithm for Easy-First Non-Directional Dependency Parsing &ndash; writing the code</h1>
 
 
 
@@ -100,78 +140,113 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 An intro to dep parsing</a>
+<li><a href="#sec-1">1 How to contribute to this document</a></li>
+<li><a href="#sec-2">2 An intro to dep parsing</a>
 <ul>
-<li><a href="#sec-1-1">1.1 Formats of the data</a></li>
-<li><a href="#sec-1-2">1.2 Example sentences</a></li>
-<li><a href="#sec-1-3">1.3 Rendering of trees in text and graphically</a></li>
+<li><a href="#sec-2-1">2.1 Formats of the data</a></li>
+<li><a href="#sec-2-2">2.2 Example sentences</a></li>
+<li><a href="#sec-2-3">2.3 Rendering of trees in text and graphically</a></li>
 </ul>
 </li>
-<li><a href="#sec-2">2 Intro to dep parsing using transition based parsing</a>
+<li><a href="#sec-3">3 Intro to dep parsing using transition based parsing</a>
 <ul>
-<li><a href="#sec-2-1">2.1 How shift reduce works</a></li>
-<li><a href="#sec-2-2">2.2 Turning a tree into a sequence of shift reduce transitions</a></li>
+<li><a href="#sec-3-1">3.1 How shift reduce works</a></li>
+<li><a href="#sec-3-2">3.2 Turning a tree into a sequence of shift reduce transitions</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">3 Malt like parsing</a>
+<li><a href="#sec-4">4 Malt like parsing</a>
 <ul>
-<li><a href="#sec-3-1">3.1 Training a classifier to learn which transition is best at each step</a></li>
-<li><a href="#sec-3-2">3.2 Typical features used for malt</a></li>
+<li><a href="#sec-4-1">4.1 Training a classifier to learn which transition is best at each step</a></li>
+<li><a href="#sec-4-2">4.2 Typical features used for malt</a></li>
 </ul>
 </li>
-<li><a href="#sec-4">4 Evaluation methods for dep parsing</a></li>
-<li><a href="#sec-5">5 Evaluation of our malt parser</a></li>
-<li><a href="#sec-6">6 Easy First</a>
+<li><a href="#sec-5">5 Evaluation methods for dep parsing</a></li>
+<li><a href="#sec-6">6 Evaluation of our malt parser</a></li>
+<li><a href="#sec-7">7 Easy First</a>
 <ul>
-<li><a href="#sec-6-1">6.1 Read the paper</a></li>
-<li><a href="#sec-6-2">6.2 Quiz on the paper</a>
+<li><a href="#sec-7-1">7.1 Read the paper</a></li>
+<li><a href="#sec-7-2">7.2 Quiz on the paper</a>
 <ul>
-<li><a href="#sec-6-2-1">6.2.1 Perceptron Classifier</a></li>
-<li><a href="#sec-6-2-2">6.2.2 Cython</a></li>
+<li><a href="#sec-7-2-1">7.2.1 Perceptron Classifier</a></li>
+<li><a href="#sec-7-2-2">7.2.2 Cython</a></li>
 </ul></li>
 </ul>
 </li>
-<li><a href="#sec-7">7 Cython primer</a></li>
+<li><a href="#sec-8">8 Cython primer</a></li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> An intro to dep parsing</h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> How to contribute to this document</h2>
 <div class="outline-text-2" id="text-1">
 
 
+<p>  
+This document exists in XHTML, latex, text and org-mode
+versions. Editing the first three is straightforward, but will force
+all future contributors (if such will exist) to use the same
+version/format, since this will break the compatibility of the
+different formats. Do this only if you're sure the future contributors
+will be OK with it, or you know they will not exist (for example: you
+are now completing the document). If you have done so, be sure to
+either label the other versions as outdated/irrelevant, or simply
+delete them.
+</p>
+<p>
+Another option is to edit the text file 'tutorial.org' in you favorite
+text editor. If you ignore lines 5-15, it's pretty much
+straightforward to understand the usage: 
+The number of left-aligned '*' before a line determine it's `depth' in
+the document (more is deeper), and elements are automatically nested in
+the immediate higher level item. 
+</p>
+<p>
+if you want \(\TeX{}\), or \(\LaTeX\),
+include its code inside adjacent dollar signs: <br/>
+<code>$[latex code here]$</code>.
+Just look at 'tutorial.org' for examples.
+</p>
+<p>
+To use the other many wonderful, yet simple to use, features of
+org-mode, like auto-numbering of items, footnotes and others, 
+it's recommended you read the <a href="http://orgmode.org/">orgmode website</a> and the (relevant) <a href="http://orgmode.org/org-mode-documentation.html">docs</a>,
+or the tutorial that comes with it as part of Emacs, or <a href="http://orgmode.org/worg/org-tutorials/">these tutorials</a>.
+</p>
+<dl>
+<dt>Exporting</dt><dd>To export to HTML, tex and text once you're done, open
+               Emacs (you  know where to get it), press Ctrl-x Ctrl-f
+               and type the path to the file. Then, press Ctrl-c
+               Ctrl-e h (for HTML), Ctrl-c Ctrl-e p (for pdf), Ctrl-c
+               Ctrl-e l (for latex), Ctrl-c Ctrl-e u (for unicode
+               text, a for ascii). Many other export format exist -
+               you'll find it in the ``Emacs-style popup''
+               window. <br/>
+               <b>MAKE SURE YOU EXPORT IN ALL FORMATS ONCE                YOU'RE DONE, SO COMPATIBILITY IS KEPT.</b>
+</dd>
+</dl>
 
-</div>
 
-<div id="outline-container-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Formats of the data</h3>
-<div class="outline-text-3" id="text-1-1">
-
-</div>
-
-</div>
-
-<div id="outline-container-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Example sentences</h3>
-<div class="outline-text-3" id="text-1-2">
-
-</div>
-
-</div>
-
-<div id="outline-container-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Rendering of trees in text and graphically</h3>
-<div class="outline-text-3" id="text-1-3">
+<p>
+As this is written (August 2012), I care about this document, and
+would be happy to extend my help if it's wanted. To email me use the
+first 3 letters of `Aviad', followed by a dot ('.') and the
+first 3 of `Reich'. Then mail me at: <code>[what-you-got]@gmail.com</code>.
+</p>
+<p>
+Additionally, there is a github repo:
+<a href="https://github.com/lxmonk/NLP12-Easyfirst_tutorial">https://github.com/lxmonk/NLP12-Easyfirst_tutorial</a>, that you can clone
+or fork. If you do, and you've created a new one - change this
+address. Otherwise, let me know and I'll update.
+</p>
 
 
-</div>
 </div>
 
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Intro to dep parsing using transition based parsing</h2>
+<h2 id="sec-2"><span class="section-number-2">2</span> An intro to dep parsing</h2>
 <div class="outline-text-2" id="text-2">
 
 
@@ -179,7 +254,7 @@
 </div>
 
 <div id="outline-container-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> How shift reduce works</h3>
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Formats of the data</h3>
 <div class="outline-text-3" id="text-2-1">
 
 </div>
@@ -187,8 +262,16 @@
 </div>
 
 <div id="outline-container-2-2" class="outline-3">
-<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Turning a tree into a sequence of shift reduce transitions</h3>
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Example sentences</h3>
 <div class="outline-text-3" id="text-2-2">
+
+</div>
+
+</div>
+
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Rendering of trees in text and graphically</h3>
+<div class="outline-text-3" id="text-2-3">
 
 
 </div>
@@ -197,7 +280,7 @@
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> Malt like parsing</h2>
+<h2 id="sec-3"><span class="section-number-2">3</span> Intro to dep parsing using transition based parsing</h2>
 <div class="outline-text-2" id="text-3">
 
 
@@ -205,7 +288,7 @@
 </div>
 
 <div id="outline-container-3-1" class="outline-3">
-<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Training a classifier to learn which transition is best at each step</h3>
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> How shift reduce works</h3>
 <div class="outline-text-3" id="text-3-1">
 
 </div>
@@ -213,7 +296,7 @@
 </div>
 
 <div id="outline-container-3-2" class="outline-3">
-<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Typical features used for malt</h3>
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Turning a tree into a sequence of shift reduce transitions</h3>
 <div class="outline-text-3" id="text-3-2">
 
 
@@ -223,16 +306,33 @@
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> Evaluation methods for dep parsing</h2>
+<h2 id="sec-4"><span class="section-number-2">4</span> Malt like parsing</h2>
 <div class="outline-text-2" id="text-4">
 
 
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Training a classifier to learn which transition is best at each step</h3>
+<div class="outline-text-3" id="text-4-1">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Typical features used for malt</h3>
+<div class="outline-text-3" id="text-4-2">
+
+
+</div>
 </div>
 
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> Evaluation of our malt parser</h2>
+<h2 id="sec-5"><span class="section-number-2">5</span> Evaluation methods for dep parsing</h2>
 <div class="outline-text-2" id="text-5">
 
 
@@ -241,50 +341,77 @@
 </div>
 
 <div id="outline-container-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Easy First</h2>
+<h2 id="sec-6"><span class="section-number-2">6</span> Evaluation of our malt parser</h2>
 <div class="outline-text-2" id="text-6">
 
 
-
-</div>
-
-<div id="outline-container-6-1" class="outline-3">
-<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Read the paper</h3>
-<div class="outline-text-3" id="text-6-1">
-
-</div>
-
-</div>
-
-<div id="outline-container-6-2" class="outline-3">
-<h3 id="sec-6-2"><span class="section-number-3">6.2</span> Quiz on the paper</h3>
-<div class="outline-text-3" id="text-6-2">
-
-
-</div>
-
-<div id="outline-container-6-2-1" class="outline-4">
-<h4 id="sec-6-2-1"><span class="section-number-4">6.2.1</span> Perceptron Classifier</h4>
-<div class="outline-text-4" id="text-6-2-1">
-
-</div>
-
-</div>
-
-<div id="outline-container-6-2-2" class="outline-4">
-<h4 id="sec-6-2-2"><span class="section-number-4">6.2.2</span> Cython</h4>
-<div class="outline-text-4" id="text-6-2-2">
-
-
-</div>
-</div>
 </div>
 
 </div>
 
 <div id="outline-container-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> Cython primer</h2>
+<h2 id="sec-7"><span class="section-number-2">7</span> Easy First</h2>
 <div class="outline-text-2" id="text-7">
+
+
+
+</div>
+
+<div id="outline-container-7-1" class="outline-3">
+<h3 id="sec-7-1"><span class="section-number-3">7.1</span> Read the paper</h3>
+<div class="outline-text-3" id="text-7-1">
+
+
+<p>
+The article: <br/>
+<b>Easy First Dependency Parsing of Modern Hebrew</b>, <br/>
+   Yoav Goldberg and Michael Elhadad, <br/>
+   <i>SPMRL 2010 (NAACL Workshop on Statistical Parsing of    Morphologically-rich Languages)</i>
+</p>
+
+<p>
+It can be obtained from <a href="http://www.cs.bgu.ac.il/~yoavg/publications/naacl2010dep.pdf">Yoav Goldberg's BGU webpage</a>, or at the acm
+website: 
+<a href="http://dl.acm.org/citation.cfm?id=1857999.1858114">http://dl.acm.org/citation.cfm?id=1857999.1858114</a>.
+</p>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-7-2" class="outline-3">
+<h3 id="sec-7-2"><span class="section-number-3">7.2</span> Quiz on the paper</h3>
+<div class="outline-text-3" id="text-7-2">
+
+
+
+</div>
+
+<div id="outline-container-7-2-1" class="outline-4">
+<h4 id="sec-7-2-1"><span class="section-number-4">7.2.1</span> Perceptron Classifier</h4>
+<div class="outline-text-4" id="text-7-2-1">
+
+</div>
+
+</div>
+
+<div id="outline-container-7-2-2" class="outline-4">
+<h4 id="sec-7-2-2"><span class="section-number-4">7.2.2</span> Cython</h4>
+<div class="outline-text-4" id="text-7-2-2">
+
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Cython primer</h2>
+<div class="outline-text-2" id="text-8">
+
+
 
 
 </div>

@@ -1,5 +1,25 @@
 (TeX-add-style-hook "tutorial"
  (lambda ()
+    (LaTeX-add-labels
+     "sec-1"
+     "sec-2"
+     "sec-2-1"
+     "sec-2-2"
+     "sec-2-3"
+     "sec-3"
+     "sec-3-1"
+     "sec-3-2"
+     "sec-4"
+     "sec-4-1"
+     "sec-4-2"
+     "sec-5"
+     "sec-6"
+     "sec-7"
+     "sec-7-1"
+     "sec-7-2"
+     "sec-7-2-1"
+     "sec-7-2-2"
+     "sec-8")
     (TeX-add-symbols
      '("alert" 1))
     (TeX-run-style-hooks

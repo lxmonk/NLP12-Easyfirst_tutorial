@@ -5,7 +5,7 @@
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
-#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
@@ -18,7 +18,7 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:
 
 * How to contribute to this document
-
+  
 This document exists in XHTML, latex, text and org-mode
 versions. Editing the first three is straightforward, but will force
 all future contributors (if such will exist) to use the same
@@ -26,7 +26,49 @@ version/format, since this will break the compatibility of the
 different formats. Do this only if you're sure the future contributors
 will be OK with it, or you know they will not exist (for example: you
 are now completing the document). If you have done so, be sure to
-either label the other versions as outdated/irrelevant, or 
+either label the other versions as outdated/irrelevant, or simply
+delete them.
+
+Another option is to edit the text file 'tutorial.org' in you favorite
+text editor. If you ignore lines 5-15, it's pretty much
+straightforward to understand the usage: 
+The number of left-aligned '*' before a line determine it's `depth' in
+the document (more is deeper), and elements are automatically nested in
+the immediate higher level item. 
+
+if you want $\TeX{}$, or $\LaTeX$,
+include its code inside adjacent dollar signs: \\
+=$[latex code here]$=.
+Just look at 'tutorial.org' for examples.
+
+To use the other many wonderful, yet simple to use, features of
+org-mode, like auto-numbering of items, footnotes and others, 
+it's recommended you read the [[http://orgmode.org/][orgmode website]] and the (relevant) [[http://orgmode.org/org-mode-documentation.html][docs]],
+or the tutorial that comes with it as part of Emacs, or [[http://orgmode.org/worg/org-tutorials/][these
+tutorials]].
+
+- Exporting :: To export to HTML, tex and text once you're done, open
+               Emacs (you  know where to get it), press Ctrl-x Ctrl-f
+               and type the path to the file. Then, press Ctrl-c
+               Ctrl-e h (for HTML), Ctrl-c Ctrl-e p (for pdf), Ctrl-c
+               Ctrl-e l (for latex), Ctrl-c Ctrl-e u (for unicode
+               text, a for ascii). Many other export format exist -
+               you'll find it in the ``Emacs-style popup''
+               window. \\
+               *MAKE SURE YOU EXPORT IN ALL FORMATS ONCE
+               YOU'RE DONE, SO COMPATIBILITY IS KEPT.*
+
+As this is written (August 2012), I care about this document, and
+would be happy to extend my help if it's wanted. To email me use the
+first 3 letters of `Aviad', followed by a dot ('.') and the
+first 3 of `Reich'. Then mail me at: =[what-you-got]@gmail.com=.
+
+Additionally, there is a github repo:
+[[https://github.com/lxmonk/NLP12-Easyfirst_tutorial]], that you can clone
+or fork. If you do, and you've created a new one - change this
+address. Otherwise, let me know and I'll update.
+
+
 
 * An intro to dep parsing
 
@@ -51,10 +93,25 @@ either label the other versions as outdated/irrelevant, or
 * Easy First
 
 ** Read the paper
+
+The article: \\
+*Easy First Dependency Parsing of Modern Hebrew*, \\
+   Yoav Goldberg and Michael Elhadad, \\
+   /SPMRL 2010 (NAACL Workshop on Statistical Parsing of
+   Morphologically-rich Languages)/
+
+
+It can be obtained from [[http://www.cs.bgu.ac.il/~yoavg/publications/naacl2010dep.pdf][Yoav Goldberg's BGU webpage]], or at the acm
+website: 
+http://dl.acm.org/citation.cfm?id=1857999.1858114.
+
+
+   
 ** Quiz on the paper
+
 *** Perceptron Classifier
 *** Cython
-
+    
 * Cython primer
 
 
