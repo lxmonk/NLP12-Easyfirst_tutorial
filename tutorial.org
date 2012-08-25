@@ -179,14 +179,31 @@ http://dl.acm.org/citation.cfm?id=1857999.1858114.
    making this decision hardest? Can you "feel" this difficulty trying
    to parse the sentence yourself?
 
-5) In algorithm 1: if line 3 would be *changed* to
-   $pending = p_{1} \ldots p_{n-1} \leftarrow w_{1} \ldots w_{n-1}$
+5) Algorithm 1.1 is identical to algorithm 1 (see below), but in it, line 3 is *changed* to
+   $pending = p_{1} \ldots p_{n-1} \leftarrow w_{1} \ldots w_{n-1}$.
+   What will be the first step in parsing the sentence "a brown fox
+   jumped with joy" in which the two algorithms will diverge? (hint:
+   use figure 1) 
+   In general, what will this change cause? \\
+   file:images/Algorithm1.png]] \\
+6) What does the function EdgeFor do? How?
+7) Write the loop from line 5 in python.
+
+8) Can you find this loop in the file [[easyfirst.py]]? (hint: the
+   variables in lines 174,175 are never used, and can be safely
+   removed from the =train= function).
+
+9) 
 
 *** Perceptron Classifier
 *** Cython
     
 * Cython primer
 
+* Code
+** <<easyfirst.py>>:
+[[https://gist.github.com/3467275]]
 
-
-
+#+BEGIN_HTML
+<script src="https://gist.github.com/3467275.js?file=easyfirst.py"></script>
+#+END_HTML

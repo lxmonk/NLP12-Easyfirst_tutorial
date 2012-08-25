@@ -175,6 +175,11 @@
 </ul>
 </li>
 <li><a href="#sec-8">8 Cython primer</a></li>
+<li><a href="#sec-9">9 Code</a>
+<ul>
+<li><a href="#sec-9-1">9.1 easyfirst.py:</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -496,8 +501,22 @@ website:
    to parse the sentence yourself?
 
 </li>
-<li>In algorithm 1: if line 3 would be <b>changed</b> to
-   \(pending = p_{1} \ldots p_{n-1} \leftarrow w_{1} \ldots w_{n-1}\)
+<li>Algorithm 1.1 is identical to algorithm 1 (see below), but in it, line 3 is <b>changed</b> to
+   \(pending = p_{1} \ldots p_{n-1} \leftarrow w_{1} \ldots w_{n-1}\).
+   What will be the first step in parsing the sentence "a brown fox
+   jumped with joy" in which the two algorithms will diverge? (hint:
+   use figure 1) 
+   In general, what will this change cause? <br/>
+   <img src="images/Algorithm1.png"  alt="images/Algorithm1.png" />]] <br/>
+</li>
+<li>What does the function EdgeFor do? How?
+</li>
+<li>Write the loop from line 5 in python.
+
+</li>
+<li>Can you find this loop in the file <a href="#sec-9-1">easyfirst.py</a>? (hint: the
+   variables in lines 174,175 are never used, and can be safely
+   removed from the <code>train</code> function).
 </li>
 </ol>
 
@@ -530,9 +549,27 @@ website:
 <div class="outline-text-2" id="text-8">
 
 
+</div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Code</h2>
+<div class="outline-text-2" id="text-9">
 
 
+</div>
 
+<div id="outline-container-9-1" class="outline-3">
+<h3 id="sec-9-1"><span class="section-number-3">9.1</span> <span class="target">easyfirst.py</span> :</h3>
+<div class="outline-text-3" id="text-9-1">
+
+<p><a href="https://gist.github.com/3467275">https://gist.github.com/3467275</a>
+</p>
+
+
+<script src="https://gist.github.com/3467275.js?file=easyfirst.py"></script>
+</div>
 </div>
 </div>
 </div>
