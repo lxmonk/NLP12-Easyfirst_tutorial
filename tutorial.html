@@ -169,12 +169,14 @@
 <ul>
 <li><a href="#sec-7-2-1">7.2.1 Introduction and Easy-First</a></li>
 <li><a href="#sec-7-2-2">7.2.2 Parsing Algorithm</a></li>
-<li><a href="#sec-7-2-3">7.2.3 Perceptron Classifier</a></li>
-<li><a href="#sec-7-2-4">7.2.4 Cython</a></li>
+<li><a href="#sec-7-2-3">7.2.3 Learning Algorithm and Feature Representation</a></li>
+<li><a href="#sec-7-2-4">7.2.4 Computational Complexity and Efficient Implementation</a></li>
+<li><a href="#sec-7-2-5">7.2.5 Perceptron Classifier</a></li>
+<li><a href="#sec-7-2-6">7.2.6 Cython</a></li>
 </ul></li>
 </ul>
 </li>
-<li><a href="#sec-8">8 Cython primer</a></li>
+<li><a href="#sec-8">8 Cython Primer</a></li>
 <li><a href="#sec-9">9 Code</a>
 <ul>
 <li><a href="#sec-9-1">9.1 easyfirst.py:</a></li>
@@ -508,15 +510,24 @@ website:
    use figure 1) 
    In general, what will this change cause? <br/>
    <img src="images/Algorithm1.png"  alt="images/Algorithm1.png" />]] <br/>
+
 </li>
 <li>What does the function EdgeFor do? How?
+
 </li>
 <li>Write the loop from line 5 in python.
 
 </li>
-<li>Can you find this loop in the file <a href="#sec-9-1">easyfirst.py</a>? (hint: the
-   variables in lines 174,175 are never used, and can be safely
-   removed from the <code>train</code> function).
+<li>Can you find this loop in the file <a href="#sec-9-1">easyfirst.py</a>? <br/>
+   <b>hint 1</b>: <br/>
+   the variables in lines 174,175 are never used, and can be safely 
+   removed from the <code>train</code> function).<br/>
+   <b>hint 2</b>: <br/>
+   <code>&gt;&gt;&gt; zip(range(10), range(10)[1:])</code> <br/>
+   <code>[(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8), (8, 9)]</code>
+
+</li>
+<li>In line 5, where is \(score(act(i))\) taken from?
 </li>
 </ol>
 
@@ -526,18 +537,59 @@ website:
 </div>
 
 <div id="outline-container-7-2-3" class="outline-4">
-<h4 id="sec-7-2-3"><span class="section-number-4">7.2.3</span> Perceptron Classifier</h4>
+<h4 id="sec-7-2-3"><span class="section-number-4">7.2.3</span> Learning Algorithm and Feature Representation</h4>
 <div class="outline-text-4" id="text-7-2-3">
 
+<p>    see <a href="#sec-7-2-5">Perceptron Classifier</a>
+</p>
 </div>
 
 </div>
 
 <div id="outline-container-7-2-4" class="outline-4">
-<h4 id="sec-7-2-4"><span class="section-number-4">7.2.4</span> Cython</h4>
+<h4 id="sec-7-2-4"><span class="section-number-4">7.2.4</span> Computational Complexity and Efficient Implementation</h4>
 <div class="outline-text-4" id="text-7-2-4">
 
 
+<ol>
+<li>From the article (pg. 5): <br/>
+   "The parsing algorithm (Algorithm 1) begins with
+   \(n + 1\) disjoint structures (the words of the sentence +
+   ROOT symbol), and terminates with one connected
+   structure. Each iteration of the main loop connects
+   two structures and removes one of them, and so the
+   loop repeats for exactly \(n\) times.
+   The \(\arg\max\) in line 5 selects the maximal scoring
+   action/location pair. At iteration \(i\), there are \(n - 1\)
+   locations to choose from, and a naive computation of
+   the \(\arg\max\) is \(O(n)\), resulting in an \(O(n^{2})\) algorithm."<br/>
+   Is the algorithm really \(O(n^{2})\)? <br/>
+   <b>Why? What is the non-naive computation?</b>
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-7-2-5" class="outline-4">
+<h4 id="sec-7-2-5"><span class="section-number-4">7.2.5</span> <span class="target">Perceptron Classifier</span></h4>
+<div class="outline-text-4" id="text-7-2-5">
+
+</div>
+
+</div>
+
+<div id="outline-container-7-2-6" class="outline-4">
+<h4 id="sec-7-2-6"><span class="section-number-4">7.2.6</span> <span class="target">Cython</span></h4>
+<div class="outline-text-4" id="text-7-2-6">
+
+<p>    First, if you are not yet familiar with <a href="http://cython.org">Cython</a>, it's highly
+    recommended you read the <a href="http://docs.cython.org/">docs</a> first, or minimally (and
+    reasonably) <a href="http://conference.scipy.org/proceedings/SciPy2009/paper_1/full_text.pdf">the tutorial (pdf)</a>. A minimal <a href="#sec-8">Cython Primer</a> is given
+    below. 
+</p>
 </div>
 </div>
 </div>
@@ -545,7 +597,7 @@ website:
 </div>
 
 <div id="outline-container-8" class="outline-2">
-<h2 id="sec-8"><span class="section-number-2">8</span> Cython primer</h2>
+<h2 id="sec-8"><span class="section-number-2">8</span> <span class="target">Cython Primer</span></h2>
 <div class="outline-text-2" id="text-8">
 
 
