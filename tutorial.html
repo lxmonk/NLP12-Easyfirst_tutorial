@@ -167,8 +167,10 @@
 <li><a href="#sec-7-1">7.1 Read the paper</a></li>
 <li><a href="#sec-7-2">7.2 Quiz on the paper</a>
 <ul>
-<li><a href="#sec-7-2-1">7.2.1 Perceptron Classifier</a></li>
-<li><a href="#sec-7-2-2">7.2.2 Cython</a></li>
+<li><a href="#sec-7-2-1">7.2.1 Introduction and Easy-First</a></li>
+<li><a href="#sec-7-2-2">7.2.2 Parsing Algorithm</a></li>
+<li><a href="#sec-7-2-3">7.2.3 Perceptron Classifier</a></li>
+<li><a href="#sec-7-2-4">7.2.4 Cython</a></li>
 </ul></li>
 </ul>
 </li>
@@ -389,16 +391,132 @@ website:
 </div>
 
 <div id="outline-container-7-2-1" class="outline-4">
-<h4 id="sec-7-2-1"><span class="section-number-4">7.2.1</span> Perceptron Classifier</h4>
+<h4 id="sec-7-2-1"><span class="section-number-4">7.2.1</span> Introduction and Easy-First</h4>
 <div class="outline-text-4" id="text-7-2-1">
+
+
+<ol>
+<li>From the article (pg. 1): <br/>
+     "Current dependency parsers can be categorized
+     into three families: <b>local-and-greedy transition-based parsers</b>
+     (e.g., MALTPARSER (Nivre et al., 
+     2006)), <b>globally optimized graph-based parsers</b>
+     (e.g., MST P ARSER (McDonald et al., 2005)), and
+     <b>hybrid systems</b> (e.g., (Sagae and Lavie, 2006b;
+     Nivre and McDonald, 2008)), which combine the
+     output of various parsers into a new and improved
+     parse, and <b>which are orthogonal to our approach</b>."  (no emphasis   
+   in the original text) <br/>
+   <span style="text-decoration:underline;">Who is orthogonal to the authors' approach? Why?</span> <br/>
+<dl>
+<dt>a</dt><dd>Local-and-greedy transition-based parsers
+</dd>
+<dt>b</dt><dd>Globally optimized graph-based parsers
+</dd>
+<dt>c</dt><dd>Hybrid systems
+</dd>
+<dt>d</dt><dd>All of the above
+</dd>
+<dt>e</dt><dd>None of the above
+
+</dd>
+</dl>
+
+</li>
+<li>According to the article, what are the shortcomings of
+   transition-based parsers? Which of these have been addressed by the
+   easy-first parser? How?
+
+</li>
+<li>One might claim that transition-based parsers suffer from an
+   imbalance, in relation to the knowledge they have about the
+   sentence as it's being parsed. How might easy-first help to mend
+   this? 
+
+</li>
+<li>Why are transition-based parsers often restricted to only a limited
+   look-ahead window? 
+
+</li>
+<li>When will we prefer a globally optimized graph-based parser over a
+   transition-based parser? When would a transition-based one be more
+   appropriate? 
+
+</li>
+<li>The article states that easy-first is a greedy algorithm. What are
+   the benefits of this fact? 
+
+</li>
+<li>How are transition-based parsers different than humans when
+   dependency-parsing a sentence? 
+
+</li>
+<li>Do humans annotate a sentence in a way similar to graph-based
+   parsers? 
+
+</li>
+<li>Of the three parser classes (transition, graph-based and
+   easy-first), which is the most similar to a human's way of
+   annotating a sentence? 
+
+</li>
+<li>In your opinion, is being similar to the human way of parsing a
+    sentence a positive or a negative approach to the problem? Why?
+</li>
+</ol>
+
 
 </div>
 
 </div>
 
 <div id="outline-container-7-2-2" class="outline-4">
-<h4 id="sec-7-2-2"><span class="section-number-4">7.2.2</span> Cython</h4>
+<h4 id="sec-7-2-2"><span class="section-number-4">7.2.2</span> Parsing Algorithm</h4>
 <div class="outline-text-4" id="text-7-2-2">
+
+
+<ol>
+<li>Look at figure 1 in the article. In each step, how is the action
+    to be performed chosen?
+
+</li>
+<li>In step 1 (figure 1), if the bold number <b>403</b> was instead 136,
+   what action would have been performed? 
+
+</li>
+<li>What is the range of values for the arc "brown &ndash;&gt; fox", assuming
+   all others remain unchanged, that will lead to the same parse tree?
+   What is the range for the arcs "a &ndash;&gt; brown" and "joy &ndash;&gt; with"
+   that will lead to the same parse tree?
+
+</li>
+<li>Assuming the <b>difficulty</b> of choosing an action is measured by the
+   difference between the two highest arc's score. On which step was
+   making this decision hardest? Can you "feel" this difficulty trying
+   to parse the sentence yourself?
+
+</li>
+<li>In algorithm 1: if line 3 would be <b>changed</b> to
+   \(pending = p_{1} \ldots p_{n-1} \leftarrow w_{1} \ldots w_{n-1}\)
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-7-2-3" class="outline-4">
+<h4 id="sec-7-2-3"><span class="section-number-4">7.2.3</span> Perceptron Classifier</h4>
+<div class="outline-text-4" id="text-7-2-3">
+
+</div>
+
+</div>
+
+<div id="outline-container-7-2-4" class="outline-4">
+<h4 id="sec-7-2-4"><span class="section-number-4">7.2.4</span> Cython</h4>
+<div class="outline-text-4" id="text-7-2-4">
 
 
 </div>
@@ -410,6 +528,7 @@ website:
 <div id="outline-container-8" class="outline-2">
 <h2 id="sec-8"><span class="section-number-2">8</span> Cython primer</h2>
 <div class="outline-text-2" id="text-8">
+
 
 
 

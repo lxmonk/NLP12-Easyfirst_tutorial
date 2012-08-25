@@ -18,7 +18,9 @@
      "sec-7-1"
      "sec-7-2"
      "sec-7-2-1"
+     "sec-7-2-1-1"
      "sec-7-2-2"
+     "sec-7-2-3"
      "sec-8")
     (TeX-add-symbols
      '("alert" 1))
