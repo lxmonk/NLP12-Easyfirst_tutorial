@@ -140,28 +140,33 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 How to contribute to this document</a></li>
-<li><a href="#sec-2">2 An intro to dep parsing</a>
+<li><a href="#sec-1">1 How to contribute to this document</a>
+<ul>
+<li><a href="#sec-1-1">1.1 All formats</a></li>
+<li><a href="#sec-1-2">1.2 OPTION: Using Emacs' org-mode</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2 An intro to dep parsing [0/3]</a>
 <ul>
 <li><a href="#sec-2-1">2.1 Formats of the data</a></li>
 <li><a href="#sec-2-2">2.2 Example sentences</a></li>
 <li><a href="#sec-2-3">2.3 Rendering of trees in text and graphically</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">3 Intro to dep parsing using transition based parsing</a>
+<li><a href="#sec-3">3 Intro to dep parsing using transition based parsing [0/2]</a>
 <ul>
 <li><a href="#sec-3-1">3.1 How shift reduce works</a></li>
 <li><a href="#sec-3-2">3.2 Turning a tree into a sequence of shift reduce transitions</a></li>
 </ul>
 </li>
-<li><a href="#sec-4">4 Malt like parsing</a>
+<li><a href="#sec-4">4 Malt like parsing [0/2]</a>
 <ul>
 <li><a href="#sec-4-1">4.1 Training a classifier to learn which transition is best at each step</a></li>
 <li><a href="#sec-4-2">4.2 Typical features used for malt</a></li>
 </ul>
 </li>
 <li><a href="#sec-5">5 Evaluation methods for dep parsing</a></li>
-<li><a href="#sec-6">6 Evaluation of our malt parser</a></li>
+<li><a href="#sec-6">6 Evaluation of a demo malt parser</a></li>
 <li><a href="#sec-7">7 Easy First</a>
 <ul>
 <li><a href="#sec-7-1">7.1 Read the paper</a></li>
@@ -192,47 +197,74 @@
 <div class="outline-text-2" id="text-1">
 
 
-<p>  
-This document exists in XHTML, latex, text and org-mode
-versions. Editing the first three is straightforward, but will force
-all future contributors (if such will exist) to use the same
-version/format, since this will break the compatibility of the
-different formats. Do this only if you're sure the future contributors
-will be OK with it, or you know they will not exist (for example: you
-are now completing the document). If you have done so, be sure to
-either label the other versions as outdated/irrelevant, or simply
-delete them.
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> All formats</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<p>   This document exists in XHTML, latex, text and org-mode
+   versions. Editing the first three is straightforward, but will force
+   all future contributors (if such will exist) to use the same
+   version/format, since this will break the compatibility of the
+   different formats. Do this only if you're sure the future contributors
+   will be OK with it, or you know they will not exist (for example: you
+   are now completing the document). If you have done so, be sure to
+   either label the other versions as outdated/irrelevant, or simply
+   delete them.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> OPTION: Using Emacs' org-mode</h3>
+<div class="outline-text-3" id="text-1-2">
+
+<p>   Another option is to edit the text file 'tutorial.org' in you favorite
+   text editor. If you ignore lines 5-15, it's pretty much
+   straightforward to understand the usage: 
+   The number of left-aligned '*' before a line determine it's `depth' in
+   the document (more is deeper), and elements are automatically nested in
+   the immediate higher level item. 
 </p>
 <p>
-Another option is to edit the text file 'tutorial.org' in you favorite
-text editor. If you ignore lines 5-15, it's pretty much
-straightforward to understand the usage: 
-The number of left-aligned '*' before a line determine it's `depth' in
-the document (more is deeper), and elements are automatically nested in
-the immediate higher level item. 
+   if you want \(\TeX{}\), or \(\LaTeX\),
+   include its code inside adjacent dollar signs: <br/>
+   <code>$[latex code here]$</code>.
+   Just look at 'tutorial.org' for examples.
 </p>
 <p>
-if you want \(\TeX{}\), or \(\LaTeX\),
-include its code inside adjacent dollar signs: <br/>
-<code>$[latex code here]$</code>.
-Just look at 'tutorial.org' for examples.
-</p>
-<p>
-To use the other many wonderful, yet simple to use, features of
-org-mode, like auto-numbering of items, footnotes and others, 
-it's recommended you read the <a href="http://orgmode.org/">orgmode website</a> and the (relevant) <a href="http://orgmode.org/org-mode-documentation.html">docs</a>,
-or the tutorial that comes with it as part of Emacs, or <a href="http://orgmode.org/worg/org-tutorials/">these tutorials</a>.
+   To use the other many wonderful, yet simple to use, features of
+   org-mode, like auto-numbering of items, footnotes and others, 
+   it's recommended you read the <a href="http://orgmode.org/">orgmode website</a> and the (relevant) <a href="http://orgmode.org/org-mode-documentation.html">docs</a>,
+   or the tutorial that comes with it as part of Emacs, or <a href="http://orgmode.org/worg/org-tutorials/">these tutorials</a>.
 </p>
 <dl>
+<dt>TODOs</dt><dd>When (if..) you complete an item that is marked as a red
+             'TODO', just delete the word 'TODO' from the <code>org</code>
+             file. Once a whole section is done, delete the topmost
+             'TODO', and the '[x/x]' after the section name, so they will
+             no longer be displayed. You could optionally move the cursor
+             to the line with a 'TODO' and press Ctrl-c Ctrl-t to mark
+             that item as done (and add a timestamp).  An additional
+             Ctrl-c Ctrl-t will remove the TODO altogether.
+</dd>
+</dl>
+
+
+
+<dl>
 <dt>Exporting</dt><dd>To export to HTML, tex and text once you're done, open
-               Emacs (you  know where to get it), press Ctrl-x Ctrl-f
-               and type the path to the file. Then, press Ctrl-c
-               Ctrl-e h (for HTML), Ctrl-c Ctrl-e p (for pdf), Ctrl-c
-               Ctrl-e l (for latex), Ctrl-c Ctrl-e u (for unicode
-               text, a for ascii). Many other export format exist -
-               you'll find it in the ``Emacs-style popup''
-               window. <br/>
-               <b>MAKE SURE YOU EXPORT IN ALL FORMATS ONCE                YOU'RE DONE, SO COMPATIBILITY IS KEPT.</b>
+             Emacs (you  know where to get it), press Ctrl-x Ctrl-f
+             and type the path to the file. Then, press Ctrl-c
+             Ctrl-e h (for HTML), Ctrl-c Ctrl-e p (for pdf), Ctrl-c
+             Ctrl-e l (for latex), Ctrl-c Ctrl-e u (for unicode
+             text, a for ascii). Many other export format exist -
+             you'll find it in the ``Emacs-style popup''
+             window. <br/>
+             <b>MAKE SURE YOU EXPORT IN ALL FORMATS ONCE YOU'RE              DONE, SO COMPATIBILITY IS MAINTAINED.</b> 
 </dd>
 </dl>
 
@@ -250,21 +282,22 @@ or fork. If you do, and you've created a new one - change this
 address. Otherwise, let me know and I'll update.
 </p>
 
-
+</div>
 </div>
 
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> An intro to dep parsing</h2>
+<h2 id="sec-2"><span class="section-number-2">2</span> <span class="todo TODO">TODO</span> An intro to dep parsing [0/3]</h2>
 <div class="outline-text-2" id="text-2">
+
 
 
 
 </div>
 
 <div id="outline-container-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Formats of the data</h3>
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> <span class="todo TODO">TODO</span> Formats of the data</h3>
 <div class="outline-text-3" id="text-2-1">
 
 </div>
@@ -272,7 +305,7 @@ address. Otherwise, let me know and I'll update.
 </div>
 
 <div id="outline-container-2-2" class="outline-3">
-<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Example sentences</h3>
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> <span class="todo TODO">TODO</span> Example sentences</h3>
 <div class="outline-text-3" id="text-2-2">
 
 </div>
@@ -280,7 +313,7 @@ address. Otherwise, let me know and I'll update.
 </div>
 
 <div id="outline-container-2-3" class="outline-3">
-<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Rendering of trees in text and graphically</h3>
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> <span class="todo TODO">TODO</span> Rendering of trees in text and graphically</h3>
 <div class="outline-text-3" id="text-2-3">
 
 
@@ -290,7 +323,7 @@ address. Otherwise, let me know and I'll update.
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> Intro to dep parsing using transition based parsing</h2>
+<h2 id="sec-3"><span class="section-number-2">3</span> <span class="todo TODO">TODO</span> Intro to dep parsing using transition based parsing [0/2]</h2>
 <div class="outline-text-2" id="text-3">
 
 
@@ -298,7 +331,7 @@ address. Otherwise, let me know and I'll update.
 </div>
 
 <div id="outline-container-3-1" class="outline-3">
-<h3 id="sec-3-1"><span class="section-number-3">3.1</span> How shift reduce works</h3>
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> <span class="todo TODO">TODO</span> How shift reduce works</h3>
 <div class="outline-text-3" id="text-3-1">
 
 </div>
@@ -306,7 +339,7 @@ address. Otherwise, let me know and I'll update.
 </div>
 
 <div id="outline-container-3-2" class="outline-3">
-<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Turning a tree into a sequence of shift reduce transitions</h3>
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> <span class="todo TODO">TODO</span> Turning a tree into a sequence of shift reduce transitions</h3>
 <div class="outline-text-3" id="text-3-2">
 
 
@@ -316,7 +349,7 @@ address. Otherwise, let me know and I'll update.
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> Malt like parsing</h2>
+<h2 id="sec-4"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Malt like parsing [0/2]</h2>
 <div class="outline-text-2" id="text-4">
 
 
@@ -324,7 +357,7 @@ address. Otherwise, let me know and I'll update.
 </div>
 
 <div id="outline-container-4-1" class="outline-3">
-<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Training a classifier to learn which transition is best at each step</h3>
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> <span class="todo TODO">TODO</span> Training a classifier to learn which transition is best at each step</h3>
 <div class="outline-text-3" id="text-4-1">
 
 </div>
@@ -332,7 +365,7 @@ address. Otherwise, let me know and I'll update.
 </div>
 
 <div id="outline-container-4-2" class="outline-3">
-<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Typical features used for malt</h3>
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> <span class="todo TODO">TODO</span> Typical features used for malt</h3>
 <div class="outline-text-3" id="text-4-2">
 
 
@@ -342,7 +375,7 @@ address. Otherwise, let me know and I'll update.
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> Evaluation methods for dep parsing</h2>
+<h2 id="sec-5"><span class="section-number-2">5</span> <span class="todo TODO">TODO</span> Evaluation methods for dep parsing</h2>
 <div class="outline-text-2" id="text-5">
 
 
@@ -351,7 +384,7 @@ address. Otherwise, let me know and I'll update.
 </div>
 
 <div id="outline-container-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Evaluation of our malt parser</h2>
+<h2 id="sec-6"><span class="section-number-2">6</span> <span class="todo TODO">TODO</span> Evaluation of a demo malt parser</h2>
 <div class="outline-text-2" id="text-6">
 
 
@@ -582,7 +615,7 @@ website:
    <b>b) Can you think of a situation in which a heap should be used in the    implementation?</b>
 
 </li>
-<li>Beam search parsers are only mentioned in the Table 1 in the
+<li>Beam search parsers are only mentioned in Table 1 in the
    article, and the quoted article was published 2 years prior. Do you
    think this might imply at the identity of the identity of the
    editor/reviewers of the NAACL article (this one)? :)
@@ -596,8 +629,9 @@ website:
 </div>
 
 <div id="outline-container-7-2-5" class="outline-4">
-<h4 id="sec-7-2-5"><span class="section-number-4">7.2.5</span> <span class="target">Perceptron Classifier</span></h4>
+<h4 id="sec-7-2-5"><span class="section-number-4">7.2.5</span> <span class="todo TODO">TODO</span> <span class="target">Perceptron Classifier</span></h4>
 <div class="outline-text-4" id="text-7-2-5">
+
 
 </div>
 
@@ -607,11 +641,45 @@ website:
 <h4 id="sec-7-2-6"><span class="section-number-4">7.2.6</span> <span class="target">Cython</span></h4>
 <div class="outline-text-4" id="text-7-2-6">
 
-<p>    First, if you are not yet familiar with <a href="http://cython.org">Cython</a>, it's highly
-    recommended you read the <a href="http://docs.cython.org/">docs</a> first, or minimally (and
-    reasonably) <a href="http://conference.scipy.org/proceedings/SciPy2009/paper_1/full_text.pdf">the tutorial (pdf)</a>. A <i>very</i> minimal <a href="#sec-8">Cython Primer</a> is given
-    below. 
-</p>
+<ol>
+<li>First, if you are not yet familiar with <a href="http://cython.org">Cython</a>, it's highly
+      recommended you read the <a href="http://docs.cython.org/">docs</a> first, or minimally (and
+      reasonably) <a href="http://conference.scipy.org/proceedings/SciPy2009/paper_1/full_text.pdf">the tutorial (pdf)</a>. A <i>very</i> minimal <a href="#sec-8">Cython Primer</a> is given
+      below.
+
+</li>
+<li>In the file <a href="#sec-9-2">ml.pyx</a> below, what classes are created?
+
+</li>
+<li>Which of them are python-only? Why?
+
+</li>
+<li>There are several "data" classes: <code>DoublesArr</code>,
+      <code>MulticlassModel</code>, <code>MulticlassParamData</code>, <code>MultitronParameters</code>,
+      <code>ParamData</code>, <code>PerceptronParameters</code>. What is each of them used for?
+
+</li>
+<li>Where in the code is the Perceptron initialized? What are the
+      initial values?
+
+</li>
+<li>Where is the learning (adjustment of parameters) happening?
+
+</li>
+<li>In line 518, the <code>score</code> function is defined. Follow the code,
+      and answer these questions:
+      a) How is the score calculated?
+      b) When will the <code>except</code> clause (lines 528-529) be executed?
+      c) Can you re-write the function using a functional (rather than
+      the current imperative) style?
+</li>
+</ol>
+
+
+
+
+
+
 </div>
 </div>
 </div>

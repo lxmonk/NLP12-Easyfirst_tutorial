@@ -19,44 +19,56 @@
 
 * How to contribute to this document
   
-This document exists in XHTML, latex, text and org-mode
-versions. Editing the first three is straightforward, but will force
-all future contributors (if such will exist) to use the same
-version/format, since this will break the compatibility of the
-different formats. Do this only if you're sure the future contributors
-will be OK with it, or you know they will not exist (for example: you
-are now completing the document). If you have done so, be sure to
-either label the other versions as outdated/irrelevant, or simply
-delete them.
+** All formats
+   This document exists in XHTML, latex, text and org-mode
+   versions. Editing the first three is straightforward, but will force
+   all future contributors (if such will exist) to use the same
+   version/format, since this will break the compatibility of the
+   different formats. Do this only if you're sure the future contributors
+   will be OK with it, or you know they will not exist (for example: you
+   are now completing the document). If you have done so, be sure to
+   either label the other versions as outdated/irrelevant, or simply
+   delete them.
 
-Another option is to edit the text file 'tutorial.org' in you favorite
-text editor. If you ignore lines 5-15, it's pretty much
-straightforward to understand the usage: 
-The number of left-aligned '*' before a line determine it's `depth' in
-the document (more is deeper), and elements are automatically nested in
-the immediate higher level item. 
+** OPTION: Using Emacs' org-mode 
+   Another option is to edit the text file 'tutorial.org' in you favorite
+   text editor. If you ignore lines 5-15, it's pretty much
+   straightforward to understand the usage: 
+   The number of left-aligned '*' before a line determine it's `depth' in
+   the document (more is deeper), and elements are automatically nested in
+   the immediate higher level item. 
 
-if you want $\TeX{}$, or $\LaTeX$,
-include its code inside adjacent dollar signs: \\
-=$[latex code here]$=.
-Just look at 'tutorial.org' for examples.
+   if you want $\TeX{}$, or $\LaTeX$,
+   include its code inside adjacent dollar signs: \\
+   =$[latex code here]$=.
+   Just look at 'tutorial.org' for examples.
 
-To use the other many wonderful, yet simple to use, features of
-org-mode, like auto-numbering of items, footnotes and others, 
-it's recommended you read the [[http://orgmode.org/][orgmode website]] and the (relevant) [[http://orgmode.org/org-mode-documentation.html][docs]],
-or the tutorial that comes with it as part of Emacs, or [[http://orgmode.org/worg/org-tutorials/][these
-tutorials]].
+   To use the other many wonderful, yet simple to use, features of
+   org-mode, like auto-numbering of items, footnotes and others, 
+   it's recommended you read the [[http://orgmode.org/][orgmode website]] and the (relevant) [[http://orgmode.org/org-mode-documentation.html][docs]],
+   or the tutorial that comes with it as part of Emacs, or [[http://orgmode.org/worg/org-tutorials/][these
+   tutorials]].
 
-- Exporting :: To export to HTML, tex and text once you're done, open
-               Emacs (you  know where to get it), press Ctrl-x Ctrl-f
-               and type the path to the file. Then, press Ctrl-c
-               Ctrl-e h (for HTML), Ctrl-c Ctrl-e p (for pdf), Ctrl-c
-               Ctrl-e l (for latex), Ctrl-c Ctrl-e u (for unicode
-               text, a for ascii). Many other export format exist -
-               you'll find it in the ``Emacs-style popup''
-               window. \\
-               *MAKE SURE YOU EXPORT IN ALL FORMATS ONCE
-               YOU'RE DONE, SO COMPATIBILITY IS KEPT.*
+   - TODOs :: When (if..) you complete an item that is marked as a red
+             'TODO', just delete the word 'TODO' from the =org=
+             file. Once a whole section is done, delete the topmost
+             'TODO', and the '[x/x]' after the section name, so they will
+             no longer be displayed. You could optionally move the cursor
+             to the line with a 'TODO' and press Ctrl-c Ctrl-t to mark
+             that item as done (and add a timestamp).  An additional
+             Ctrl-c Ctrl-t will remove the TODO altogether.
+
+
+    - Exporting :: To export to HTML, tex and text once you're done, open
+             Emacs (you  know where to get it), press Ctrl-x Ctrl-f
+             and type the path to the file. Then, press Ctrl-c
+             Ctrl-e h (for HTML), Ctrl-c Ctrl-e p (for pdf), Ctrl-c
+             Ctrl-e l (for latex), Ctrl-c Ctrl-e u (for unicode
+             text, a for ascii). Many other export format exist -
+             you'll find it in the ``Emacs-style popup''
+             window. \\
+             *MAKE SURE YOU EXPORT IN ALL FORMATS ONCE YOU'RE
+             DONE, SO COMPATIBILITY IS MAINTAINED.* 
 
 As this is written (August 2012), I care about this document, and
 would be happy to extend my help if it's wanted. To email me use the
@@ -69,29 +81,29 @@ or fork. If you do, and you've created a new one - change this
 address. Otherwise, let me know and I'll update.
 
 
+* TODO An intro to dep parsing [0/3]
 
-* An intro to dep parsing
 
-** Formats of the data
-** Example sentences
-** Rendering of trees in text and graphically
+** TODO Formats of the data
+** TODO Example sentences
+** TODO Rendering of trees in text and graphically
 
-* Intro to dep parsing using transition based parsing
+* TODO Intro to dep parsing using transition based parsing [0/2]
 
-**  How shift reduce works
-** Turning a tree into a sequence of shift reduce transitions
+** TODO How shift reduce works
+** TODO Turning a tree into a sequence of shift reduce transitions
 
-* Malt like parsing
+* TODO Malt like parsing [0/2]
 
-** Training a classifier to learn which transition is best at each step
-** Typical features used for malt
+** TODO Training a classifier to learn which transition is best at each step
+** TODO Typical features used for malt
 
-* Evaluation methods for dep parsing
+* TODO Evaluation methods for dep parsing
 
-* Evaluation of our malt parser
+* TODO Evaluation of a demo malt parser
 
 * Easy First
-
+  
 ** Read the paper
 
 The article: \\
@@ -229,19 +241,44 @@ http://dl.acm.org/citation.cfm?id=1857999.1858114.
    *b) Can you think of a situation in which a heap should be used in the
    implementation?*
 
-3) Beam search parsers are only mentioned in the Table 1 in the
+3) Beam search parsers are only mentioned in Table 1 in the
    article, and the quoted article was published 2 years prior. Do you
    think this might imply at the identity of the identity of the
    editor/reviewers of the NAACL article (this one)? :)
 
     
-*** <<Perceptron Classifier>>
-*** <<Cython>>
-    First, if you are not yet familiar with [[http://cython.org][Cython]], it's highly
-    recommended you read the [[http://docs.cython.org/][docs]] first, or minimally (and
-    reasonably) [[http://conference.scipy.org/proceedings/SciPy2009/paper_1/full_text.pdf][the tutorial (pdf)]]. A /very/ minimal [[Cython Primer]] is given
-    below. 
+*** TODO <<Perceptron Classifier>>
     
+*** <<Cython>>
+   1) First, if you are not yet familiar with [[http://cython.org][Cython]], it's highly
+      recommended you read the [[http://docs.cython.org/][docs]] first, or minimally (and
+      reasonably) [[http://conference.scipy.org/proceedings/SciPy2009/paper_1/full_text.pdf][the tutorial (pdf)]]. A /very/ minimal [[Cython Primer]] is given
+      below.
+
+   2) In the file [[ml.pyx]] below, what classes are created?
+
+   3) Which of them are python-only? Why?
+
+   4) There are several "data" classes: =DoublesArr=,
+      =MulticlassModel=, =MulticlassParamData=, =MultitronParameters=,
+      =ParamData=, =PerceptronParameters=. What is each of them used for?
+
+   5) Where in the code is the Perceptron initialized? What are the
+      initial values?
+
+   6) Where is the learning (adjustment of parameters) happening?
+
+   7) In line 518, the =score= function is defined. Follow the code,
+      and answer these questions:
+      a) How is the score calculated?
+      b) When will the =except= clause (lines 528-529) be executed?
+      c) Can you re-write the function using a functional (rather than
+      the current imperative) style?
+
+
+
+    
+  
 * <<Cython Primer>>
     From [[https://en.wikipedia.org/wiki/Cython][Wikipedia]]: \\
     "Cython is a programming language to simplify writing C and C++
