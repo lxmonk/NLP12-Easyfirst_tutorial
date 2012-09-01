@@ -192,12 +192,10 @@ http://dl.acm.org/citation.cfm?id=1857999.1858114.
 7) Write the loop from line 5 in python.
 
 8) Can you find this loop in the file [[easyfirst.py]]? \\
-   *hint 1*: \\
-   the variables in lines 174,175 are never used, and can be safely 
-   removed from the =train= function).\\
-   *hint 2*: \\
-   =>>> zip(range(10), range(10)[1:])= \\
-   =[(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8), (8, 9)]=
+   + hint 1 :: the variables in lines 174,175 are never used, and can
+               be safely removed from the =train= function).\\ 
+   + hint 2 :: =In [1]: zip(range(10), range(10)[1:])= \\ 
+               =Out[1]: [(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8), (8, 9)]=
    
 9) In line 5, where is $score(act(i))$ taken from?
 
@@ -219,15 +217,75 @@ http://dl.acm.org/citation.cfm?id=1857999.1858114.
    the $\arg\max$ is $O(n)$, resulting in an $O(n^{2})$ algorithm."\\
    Is the algorithm really $O(n^{2})$? \\
    *Why? What is the non-naive computation?*
+
+2) From the article (pg. 5: footnote 4): \\
+   "Indeed, in our implementation we do not use a heap, and
+   opt instead to find the argmax using a simple O(n) max
+   operation. This $O(n^2)$ algorithm is faster in practice than the heap 
+   based one, as both are dominated by the $O(n)$ feature extraction,
+   while the cost of the $O(n)$ max calculation is negligible 
+   compared to the constants involved in heap maintenance." \\
+   *a) What should have been the complexity using the heap?* \\
+   *b) Can you think of a situation in which a heap should be used in the
+   implementation?*
+
+3) Beam search parsers are only mentioned in the Table 1 in the
+   article, and the quoted article was published 2 years prior. Do you
+   think this might imply at the identity of the identity of the
+   editor/reviewers of the NAACL article (this one)? :)
+
     
 *** <<Perceptron Classifier>>
 *** <<Cython>>
     First, if you are not yet familiar with [[http://cython.org][Cython]], it's highly
     recommended you read the [[http://docs.cython.org/][docs]] first, or minimally (and
-    reasonably) [[http://conference.scipy.org/proceedings/SciPy2009/paper_1/full_text.pdf][the tutorial (pdf)]]. A minimal [[Cython Primer]] is given
+    reasonably) [[http://conference.scipy.org/proceedings/SciPy2009/paper_1/full_text.pdf][the tutorial (pdf)]]. A /very/ minimal [[Cython Primer]] is given
     below. 
     
 * <<Cython Primer>>
+    From [[https://en.wikipedia.org/wiki/Cython][Wikipedia]]: \\
+    "Cython is a programming language to simplify writing C and C++
+    extension modules for the CPython Python runtime.[3] Strictly
+    speaking, Cython syntax is a superset of Python syntax
+    additionally supporting: 
+    + Direct calling of C functions, or C++ functions/methods, from Cython code.
+    + Strong typing of Cython variables, classes, and class attributes
+      as C types. 
+    Cython compiles to C or C++ code rather than Python, and the
+    result is used as a Python Extension Module or as a stand-alone
+    application embedding the CPython runtime."
+
+    The importance of Cython in the implementation of the easy-first
+    algorithm, is that it allows a fast and optimized version of
+    python to be executed. This is not an accurate statement, but it
+    suffices for this paper.
+
+    The Cython code, is used to create the =ml= module, and is found
+    in the file =ml.pyx=. This file is *compiled* to the file =ml.c=,
+    but for clarity, read the =.pyx= file, not the C one.
+
+    If you have not read any of the links above, here is the bare
+    minimum you need to know in order to read =ml.pyx=: 
+    1) =cimport= means 'import from a C library.'
+    2) =cdef= means 'define in C -- usually it'll be a function, a
+       (python) class, or a variable definition, and will have a type.'
+    3) Types are declared. To declare (for example) a pointer to a
+       double, either =cdef double* double_ptr= or =<double *>
+       func(args)= is used.
+    4) =cpdef= means 'this is defined in a way that will be accessible
+       from both python and c.' In order to define a python-only
+       function, the usual =def= applies.
+    5) A return type is declared for C functions. For example, \\
+       =cpdef object get_scores(self,list features):= (taken from =ml.pyx= line 133) means: the
+       function =get_scores= is defined in both python and C. it will
+       *return an object*, and will receive a =python list= type bound
+       to the =features= variable. As in python, =self= means it's a method
+    6) =__cinit__= is the class constructor (python's =__init__=) when
+       executed from C. Think of it as =__init__=.
+    7) =__dealloc__= is the class destructor.
+       
+    
+
 
 * Code
 ** <<easyfirst.py>>:
@@ -236,3 +294,11 @@ http://dl.acm.org/citation.cfm?id=1857999.1858114.
 #+BEGIN_HTML
 <script src="https://gist.github.com/3467275.js?file=easyfirst.py"></script>
 #+END_HTML
+
+** <<ml.pyx>>:
+[[https://gist.github.com/3566683]]
+
+#+BEGIN_HTML
+<script src="https://gist.github.com/3566683.js?file=ml.pyx"></script>
+#+END_HTML
+

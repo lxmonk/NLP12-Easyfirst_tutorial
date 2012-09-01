@@ -1,0 +1,93 @@
+
+% {{{ a brown fox jumped
+\begin{tikzpicture}
+   %\node at (0,0) (e1) {};
+   [edge from parent/.style={draw,thick}]
+   { [start chain=1]
+      \node at (-6,0) (e1) {(1) \hspace{1em} \textsc{AttachRight(2)}};
+      \node [on chain=1,below right of=e1,yshift=-1.0em] (a) {a};
+      \node [on chain=1] (b) {brown};
+      \node [on chain=1] (f) {fox};
+      \node [on chain=1] (ju) {jumped};
+      \node [on chain=1] (w) {with};
+      \node [on chain=1] (jo) {joy};
+   }
+   \foreach \f/\t/\u/\v in {a/b/-157/-27,
+                            b/f/-68/\textbf{403},
+                            f/ju/-197/-47,
+                            ju/w/-152/-243,
+                            w/jo/231/3
+                            }
+      {
+      \path[<-] (\f) edge[bend left] node[above] {\u} (\t);
+      \path[->] (\f) edge[bend right] node[below] {\v} (\t);
+      }
+%\end{tikzpicture}
+%\\
+%\begin{tikzpicture}
+   { [start chain=1 going right]
+      \node at (-6,-3) (e2) {(2) \hspace{1em} \textsc{AttachRight(1)}};
+      \node [on chain=1,below of=e2,xshift=-2em,yshift=-1.0em] (a) {a};
+      \node [on chain=1] (f) {fox} child {node {brown} };
+      \node [on chain=1] (ju) {jumped};
+      \node [on chain=1] (w) {with};
+      \node [on chain=1] (jo) {joy};
+   }
+   \foreach \f/\t/\u/\v in {a/f/-52/\textbf{314},
+                            f/ju/-159/0,
+                            ju/w/-176/-146,
+                            w/jo/246/12
+                            }
+      {
+      \path[<-] (\f) edge[bend left] node[above] {\u} (\t);
+      \path[->] (\f) edge[bend right] node[below] {\v} (\t);
+      }
+
+   { [start chain=1]
+      \node at (6,-3) (e3) {(3) \hspace{1em} \textsc{AttachRight(1)}};
+      \node [on chain=1,below of=e3,xshift=-2em,yshift=-1.0em] (f) {fox} child { node {a} } child { node {brown} };
+      \node [on chain=1] (ju) {jumped};
+      \node [on chain=1] (w) {with};
+      \node [on chain=1] (jo) {joy};
+   }
+   \foreach \f/\t/\u/\v in {f/ju/-133/\textbf{270},
+                            ju/w/-149/-154,
+                            w/jo/246/10
+                            }
+      {
+      \path[<-] (\f) edge[bend left] node[above] {\u} (\t);
+      \path[->] (\f) edge[bend right] node[below] {\v} (\t);
+      }
+
+   { [start chain=1]
+      \node at (-6,-7) (e4) {(4) \hspace{1em} \textsc{AttachLeft(2)}};
+      \node (ju) [on chain=1,below of=e4,xshift=-2em,yshift=-1.0em]  {jumped} child { node {fox} child { node {a} } child { node {brown} } };
+      \node (w) [on chain=1]  {with};
+      \node (jo) [on chain=1]  {joy};
+   }
+   \foreach \f/\t/\u/\v in {ju/w/-161/-435,
+                            w/jo/\textbf{186}/-2
+                            }
+      {
+      \path[<-] (\f) edge[bend left] node[above] {\u} (\t);
+      \path[->] (\f) edge[bend right] node[below] {\v} (\t);
+      }
+
+  { [start chain=1]
+      \node at (2,-7) (e5) {\hspace{1em} (5) \hspace{1em} \textsc{AttachLeft(1)}};
+      \node [on chain=1,below of=e5,xshift=-2em,yshift=-1.0em] (ju) {jumped} child { node {fox} child { node {a} } child { node {brown} } };
+      \node [on chain=1] (w) {with} child {node {joy} };
+   }
+   \foreach \f/\t/\u/\v in {ju/w/\textbf{430}/-232
+                            }
+      {
+      \path[<-] (\f) edge[bend left] node[above] {\u} (\t);
+      \path[->] (\f) edge[bend right] node[below] {\v} (\t);
+      }
+
+   { [start chain=1]
+   \node at (8,-7) (e6) {(6)};
+   \node [on chain=1,below of=e6] (a2) {jumped} child { node {fox} child { node {a} } child { node {brown} }} child { node {with} child {node {joy}}} ;
+   }
+\end{tikzpicture}
+% }}}

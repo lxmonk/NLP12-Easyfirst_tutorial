@@ -180,6 +180,7 @@
 <li><a href="#sec-9">9 Code</a>
 <ul>
 <li><a href="#sec-9-1">9.1 easyfirst.py:</a></li>
+<li><a href="#sec-9-2">9.2 ml.pyx:</a></li>
 </ul>
 </li>
 </ul>
@@ -519,12 +520,15 @@ website:
 
 </li>
 <li>Can you find this loop in the file <a href="#sec-9-1">easyfirst.py</a>? <br/>
-   <b>hint 1</b>: <br/>
-   the variables in lines 174,175 are never used, and can be safely 
-   removed from the <code>train</code> function).<br/>
-   <b>hint 2</b>: <br/>
-   <code>&gt;&gt;&gt; zip(range(10), range(10)[1:])</code> <br/>
-   <code>[(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8), (8, 9)]</code>
+<dl>
+<dt>hint 1</dt><dd>the variables in lines 174,175 are never used, and can
+               be safely removed from the <code>train</code> function).<br/>
+</dd>
+<dt>hint 2</dt><dd><code>In [1]: zip(range(10), range(10)[1:])</code> <br/>
+               <code>Out[1]: [(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8), (8, 9)]</code>
+
+</dd>
+</dl>
 
 </li>
 <li>In line 5, where is \(score(act(i))\) taken from?
@@ -565,8 +569,26 @@ website:
    the \(\arg\max\) is \(O(n)\), resulting in an \(O(n^{2})\) algorithm."<br/>
    Is the algorithm really \(O(n^{2})\)? <br/>
    <b>Why? What is the non-naive computation?</b>
+
+</li>
+<li>From the article (pg. 5: footnote 4): <br/>
+   "Indeed, in our implementation we do not use a heap, and
+   opt instead to find the argmax using a simple O(n) max
+   operation. This \(O(n^2)\) algorithm is faster in practice than the heap 
+   based one, as both are dominated by the \(O(n)\) feature extraction,
+   while the cost of the \(O(n)\) max calculation is negligible 
+   compared to the constants involved in heap maintenance." <br/>
+   <b>a) What should have been the complexity using the heap?</b> <br/>
+   <b>b) Can you think of a situation in which a heap should be used in the    implementation?</b>
+
+</li>
+<li>Beam search parsers are only mentioned in the Table 1 in the
+   article, and the quoted article was published 2 years prior. Do you
+   think this might imply at the identity of the identity of the
+   editor/reviewers of the NAACL article (this one)? :)
 </li>
 </ol>
+
 
 
 </div>
@@ -587,7 +609,7 @@ website:
 
 <p>    First, if you are not yet familiar with <a href="http://cython.org">Cython</a>, it's highly
     recommended you read the <a href="http://docs.cython.org/">docs</a> first, or minimally (and
-    reasonably) <a href="http://conference.scipy.org/proceedings/SciPy2009/paper_1/full_text.pdf">the tutorial (pdf)</a>. A minimal <a href="#sec-8">Cython Primer</a> is given
+    reasonably) <a href="http://conference.scipy.org/proceedings/SciPy2009/paper_1/full_text.pdf">the tutorial (pdf)</a>. A <i>very</i> minimal <a href="#sec-8">Cython Primer</a> is given
     below. 
 </p>
 </div>
@@ -599,6 +621,66 @@ website:
 <div id="outline-container-8" class="outline-2">
 <h2 id="sec-8"><span class="section-number-2">8</span> <span class="target">Cython Primer</span></h2>
 <div class="outline-text-2" id="text-8">
+
+<p>    From <a href="https://en.wikipedia.org/wiki/Cython">Wikipedia</a>: <br/>
+    "Cython is a programming language to simplify writing C and C++
+    extension modules for the CPython Python runtime.<sup><a class="footref" name="fnr.1" href="#fn.1">1</a></sup> Strictly
+    speaking, Cython syntax is a superset of Python syntax
+    additionally supporting: 
+</p><ul>
+<li>Direct calling of C functions, or C++ functions/methods, from Cython code.
+</li>
+<li>Strong typing of Cython variables, classes, and class attributes
+      as C types. 
+</li>
+</ul>
+
+<p>    Cython compiles to C or C++ code rather than Python, and the
+    result is used as a Python Extension Module or as a stand-alone
+    application embedding the CPython runtime."
+</p>
+<p>
+    The importance of Cython in the implementation of the easy-first
+    algorithm, is that it allows a fast and optimized version of
+    python to be executed. This is not an accurate statement, but it
+    suffices for this paper.
+</p>
+<p>
+    The Cython code, is used to create the <code>ml</code> module, and is found
+    in the file <code>ml.pyx</code>. This file is <b>compiled</b> to the file <code>ml.c</code>,
+    but for clarity, read the <code>.pyx</code> file, not the C one.
+</p>
+<p>
+    If you have not read any of the links above, here is the bare
+    minimum you need to know in order to read <code>ml.pyx</code>: 
+</p><ol>
+<li><code>cimport</code> means 'import from a C library.'
+</li>
+<li><code>cdef</code> means 'define in C &ndash; usually it'll be a function, a
+       (python) class, or a variable definition, and will have a type.'
+</li>
+<li>Types are declared. To declare (for example) a pointer to a
+       double, either <code>cdef double* double_ptr</code> or <code>&lt;double *&gt;        func(args)</code> is used.
+</li>
+<li><code>cpdef</code> means 'this is defined in a way that will be accessible
+       from both python and c.' In order to define a python-only
+       function, the usual <code>def</code> applies.
+</li>
+<li>A return type is declared for C functions. For example, <br/>
+       <code>cpdef object get_scores(self,list features):</code> (taken from <code>ml.pyx</code> line 133) means: the
+       function <code>get_scores</code> is defined in both python and C. it will
+       <b>return an object</b>, and will receive a <code>python list</code> type bound
+       to the <code>features</code> variable. As in python, <code>self</code> means it's a method
+</li>
+<li><code>__cinit__</code> is the class constructor (python's <code>__init__</code>) when
+       executed from C. Think of it as <code>__init__</code>.
+</li>
+<li><code>__dealloc__</code> is the class destructor.
+</li>
+</ol>
+
+
+
 
 
 </div>
@@ -621,7 +703,31 @@ website:
 
 
 <script src="https://gist.github.com/3467275.js?file=easyfirst.py"></script>
+
 </div>
+
+</div>
+
+<div id="outline-container-9-2" class="outline-3">
+<h3 id="sec-9-2"><span class="section-number-3">9.2</span> <span class="target">ml.pyx</span> :</h3>
+<div class="outline-text-3" id="text-9-2">
+
+<p><a href="https://gist.github.com/3566683">https://gist.github.com/3566683</a>
+</p>
+
+
+<script src="https://gist.github.com/3566683.js?file=ml.pyx"></script>
+
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+<p class="footnote"><sup><a class="footnum" name="fn.1" href="#fnr.1">1</a></sup> DEFINITION NOT FOUND: 3
+</p>
+
+</div>
+</div>
+</div>
+
 </div>
 </div>
 </div>
