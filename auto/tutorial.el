@@ -2,6 +2,8 @@
  (lambda ()
     (LaTeX-add-labels
      "sec-1"
+     "sec-1-1"
+     "sec-1-2"
      "sec-2"
      "sec-2-1"
      "sec-2-2"
@@ -18,10 +20,20 @@
      "sec-7-1"
      "sec-7-2"
      "sec-7-2-1"
-     "sec-7-2-1-1"
      "sec-7-2-2"
      "sec-7-2-3"
-     "sec-8")
+     "sec-7-2-4"
+     "Perceptron-Classifier"
+     "sec-7-2-5"
+     "Cython"
+     "sec-7-2-6"
+     "Cython-Primer"
+     "sec-8"
+     "sec-9"
+     "easyfirst.py"
+     "sec-9-1"
+     "ml.pyx"
+     "sec-9-2")
     (TeX-add-symbols
      '("alert" 1))
     (TeX-run-style-hooks
